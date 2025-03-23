@@ -5,13 +5,20 @@ On the backhand, introducing artificial inconsistencies between statements, allo
 
 ## SCENARIO 
 This scenario that we use as example, referes to the painting [King Caspar by Hendrick Heerschop](https://commons.wikimedia.org/wiki/File:Hendrick-Heerschop-Koning-Caspar-1654.-Olieverf-op-paneel.-Berlijn-Staatliche-Museen.jpg)
-U: Why is this painting here? (Requesting the supporting arguments for the painting's inclusion)
-A: Because this painting is significant for two of the core narratives around the exhibition: showing paintings from the Dutch Golden Age and showing non stereotypical representation of black people.
-U: But the Dutch Empire was engaging in colonialism and slavery during the golden age, how can paintings of black people from that era be non stereotypical? (Questioning or attacking one of the curatorial arguments)
-A: We can see that the painting is indeed from the Golden Age, as it dates 1654 and it is painted by a Dutch author. But it also shows a black person in a non stereotypical way, as the model is representing King Caspar, one of the biblical Magi, and the character is represented in a dignified way, looking proud and self confident. The character is portraied on its own, adding to the narrative of black autonomy. Moreover, the author was influenced by Rembrandt, who, despite being a Golden Age painter, often depicted black individuals with a high degree of realism, capturing their unique personal characteristics.
+
+**U:** Why is this painting here? (Requesting the supporting arguments for the painting's inclusion)
+
+**A:** Because this painting is significant for two of the core narratives around the exhibition: showing paintings from the Dutch Golden Age and showing non stereotypical representation of black people.
+
+**U:** But the Dutch Empire was engaging in colonialism and slavery during the golden age, how can paintings of black people from that era be non stereotypical? (Questioning or attacking one of the curatorial arguments)
+
+**A:** We can see that the painting is indeed from the Golden Age, as it dates 1654 and it is painted by a Dutch author. But it also shows a black person in a non stereotypical way, as the model is representing King Caspar, one of the biblical Magi, and the character is represented in a dignified way, looking proud and self confident. The character is portraied on its own, adding to the narrative of black autonomy. Moreover, the author was influenced by Rembrandt, who, despite being a Golden Age painter, often depicted black individuals with a high degree of realism, capturing their unique personal characteristics.
+
 Would you like to know more about how the character is represented or about the social position of black people in the XVIIcentury?
-U: How is it possible that the models were black? I thought in the XVII century black people where enslaved... (Questioning or attacking one of the curatorial arguments)
-A: Not all black people in Amsterdam where slaves, and this is precisely the hidden history this exhibiton would like to tell: Black people were present in seventeenth-century Holland, both in society and in art. This subject has long remained in the shadows, but wrongly so. Rembrandt and many of his contemporaries made magnificent works of art that depict black people. It is interesting to notice that the later stereotypes of black people had not yet become dominant. Painters portrayed individual black models from life, with all their personal characteristics. Furthermore, black people were not always secondary figures in minor roles, but sometimes formed the main subject of the art work. 
+
+**U:** How is it possible that the models were black? I thought in the XVII century black people where enslaved... (Questioning or attacking one of the curatorial arguments)
+
+**A:** Not all black people in Amsterdam where slaves, and this is precisely the hidden history this exhibiton would like to tell: Black people were present in seventeenth-century Holland, both in society and in art. This subject has long remained in the shadows, but wrongly so. Rembrandt and many of his contemporaries made magnificent works of art that depict black people. It is interesting to notice that the later stereotypes of black people had not yet become dominant. Painters portrayed individual black models from life, with all their personal characteristics. Furthermore, black people were not always secondary figures in minor roles, but sometimes formed the main subject of the art work. 
 U: Oh this is very interesting, I learned something today!
 
 
@@ -20,14 +27,16 @@ U: Oh this is very interesting, I learned something today!
 The conversational agent (GPT-4o), understand what painting _this_ refers to and that the user is asking the rationale behind the painting's inclusion in the exhibition. In the CKG, the exhibition is linked to the narratives it wants to highlight through the property *crm:P16_used_specific_object* (narratives are modeled as *crm:E89_Propositional_Object*) and, we can find out what narratives are linked to an object through property *:hasAssociatedHeritageObject* .
 As artificial inconsistency, we state that an object can only be representative on one narrative:
 
-`:CuratorialNarrativeEntity rdf:type owl:Class ;
+```
+:CuratorialNarrativeEntity rdf:type owl:Class ;
 
                            rdfs:subClassOf 
-                                           [ rdf:type owl:Restriction ;
-                                             owl:onProperty :hasAssociatedHeritageObject ;
-                                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                             owl:onClass :HeritageObject
-                                           ] .`
+                                         [ rdf:type owl:Restriction ;
+					owl:onProperty :hasAssociatedHeritageObject ;
+					owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+					owl:onClass :HeritageObject
+					] .
+``` 
 We then identify **(HOW?)** arguments that support one statement or the other. For instance:
 	Narrative: Painters from the Dutch Golden Age
 		Arguments: 
