@@ -55,63 +55,69 @@ If  For the moment I have written only three (although not sure the shapes are c
 
 Number 1
 
-`ckg:CuratorialNarrativeConstraint3`
-    `a sh:NodeShape ;`
-    `sh:targetClass cgk:CuratorialNarrative ;`
-    `sh:property [`
-        `sh:path co:hasAssociatedHeritageObject ;`
-        `sh:node [`
-            `sh:path crm:P108i_was_produced_by ;`
-            `sh:node [`
-                `sh:path crm:P4_has_Time-span ;`
-                `sh:node [`
-                    `sh:property [`
-                        `sh:path rdfs:label ;`
-                        `sh:datatype xsd:integer ;`
-                        `sh:minInclusive "1575"^^xsd:integer ;`
-                        `sh:maxInclusive "1675"^^xsd:integer ;`
-                    `] ;`
-                `] ;`
-            `] ;`
-        `] ;`
-    `] .` 
+```
+ckg:CuratorialNarrativeConstraint3
+    a sh:NodeShape ;
+    sh:targetClass cgk:CuratorialNarrative ;
+    sh:property [
+        sh:path co:hasAssociatedHeritageObject ;
+        sh:node [
+            sh:path crm:P108i_was_produced_by ;
+            sh:node [
+                sh:path crm:P4_has_Time-span ;
+                sh:node [
+                    sh:property [
+                        sh:path rdfs:label ;
+                        sh:datatype xsd:integer ;
+                        sh:minInclusive "1575"^^xsd:integer ;
+                        sh:maxInclusive "1675"^^xsd:integer ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+    ] .
+```
 
 Number 5 (as checking that there is only one person shown in the painting)
 
-`ckg:CuratorialNarrativeConstraint1`
-    `a sh:NodeShape ;`
-    `sh:targetClass ckg:CuratorialNarrative ;`
-    `sh:property [`
-        `sh:path co:hasAssociatedHeritageObject ;`
-        `sh:node [`
-            `sh:path crm:P65_shows_visual_item ;`
-            `sh:class crm:E36_Visual_Item ;`
-            `sh:qualifiedValueShape [`
-                `sh:path rdf:type ;`
-                `sh:hasValue  crm:E21_Person ;`
-            `] ;`
-            `sh:qualifiedMinCount 1 ;`
-            `sh:qualifiedMaxCount 1 ;`
-            `sh:minCount 1 ;`
-            `sh:maxCount 1 ;`
-        `] ;`
-    `] .`
+```
+ckg:CuratorialNarrativeConstraint1
+    a sh:NodeShape ;
+    sh:targetClass ckg:CuratorialNarrative ;
+    sh:property [
+        sh:path co:hasAssociatedHeritageObject ;
+        sh:node [
+            sh:path crm:P65_shows_visual_item ;
+            sh:class crm:E36_Visual_Item ;
+            sh:qualifiedValueShape [
+                sh:path rdf:type ;
+                sh:hasValue  crm:E21_Person ;
+            ] ;
+            sh:qualifiedMinCount 1 ;
+            sh:qualifiedMaxCount 1 ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+        ] ;
+    ] .
+```
 
 Number  7
 
-`ckg:CuratorialNarrativeConstraint2`
-    `a sh:NodeShape ;`
-    `sh:targetClass ckg:CuratorialNarrative ;`
-    `sh:property [`
-        `sh:path co:hasAssociatedHeritageObject ;`
-        `sh:node [`
-            `sh:path crm:P108i_was_produced_by ;`
-            `sh:node [`
-                `sh:path crm:P15_was_influenced_by ;`
-                `sh:hasValue ckg:Rembrandt ;`
-            `] ;`
-        `] ;`
-    `] .`
+```
+ckg:CuratorialNarrativeConstraint2
+    a sh:NodeShape ;
+    sh:targetClass ckg:CuratorialNarrative ;
+    sh:property [
+        sh:path co:hasAssociatedHeritageObject ;
+        sh:node [
+            sh:path crm:P108i_was_produced_by ;
+            sh:node [
+                sh:path crm:P15_was_influenced_by ;
+                sh:hasValue ckg:Rembrandt ;
+            ] ;
+        ] ;
+    ] .
+```
 
 The argumentation framework highlights which of the facts represented in the knowledge graph support that the heritage object represents one narrative or the other, and extracts them producing an argumentation tree.
 
@@ -121,55 +127,67 @@ In particular in the rasa environment, it is possible to query the knowledge gra
 the relevant fields in the CKG are:
 1. Information about the exhibition: 
 
-`crm:E7_Activity  crm:P67i_is_referred_to_by  crm:E1_Description`
-`crm:E1_Description  crm:P190_has_symbolic_content  "content"^^rdfs:Literal`
+```
+crm:E7_Activity  crm:P67i_is_referred_to_by  crm:E1_Description
+crm:E1_Description  crm:P190_has_symbolic_content  "content"^^rdfs:Literal
+```
 
 **SPARQL**:
 
-`PREFIX rdf : <http://www.w3.org/1999/02/22-rdf-syntax-ns#>`
-`PREFIX crm: <http://www.cidoc-crm.org/>`
-`PREFIX : <ontology_prefix>`
+```
+PREFIX rdf : <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX crm: <http://www.cidoc-crm.org/>
+PREFIX : <ontology_prefix>
 
-`SELECT ?exhibition ?description`
-`WHERE` 
-`{`
-`?exhibition rdf:type crm:E7_Activity;`
-		`crm:P67i_is_referred_to_by ?bnode .`
-`?bnode rdf:type crm:E33_E41_Linguistic_Appellation ;`
-		`crm:P190_has_symbolic_content ?description .`
-`}`
+SELECT ?exhibition ?description
+WHERE
+{
+?exhibition rdf:type crm:E7_Activity;
+		crm:P67i_is_referred_to_by ?bnode .
+?bnode rdf:type crm:E33_E41_Linguistic_Appellation ;
+		crm:P190_has_symbolic_content ?description .
+}
+```
 
 2. Information about the objects in the painting
 
-`:HeritageObject  crm:P65_shows_visual_item  crm:E36_Visual_Item`
-`crm:E36_Visual_Item  :hasInterpretation  "content"^^rdfs:Literal`
+```
+:HeritageObject  crm:P65_shows_visual_item  crm:E36_Visual_Item
+crm:E36_Visual_Item  :hasInterpretation  "content"^^rdfs:Literal
+``` 
 
 **SPARQL**:
 
-`PREFIX rdf : <http://www.w3.org/1999/02/22-rdf-syntax-ns#>`
-`PREFIX crm: <http://www.cidoc-crm.org/>`
-`PREFIX : <ontology_prefix>`
+```
+PREFIX rdf : <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX crm: <http://www.cidoc-crm.org/>
+PREFIX : <ontology_prefix>
 
-`SELECT ?visualItem ?interpretation`
-`WHERE`
-`{{`
-	`<{painting_uri}> crm:P65_shows_visual_item ?visualItem .`
-	`?visualItem :hasInterpretation ?interpretation` .
-`}}`
+SELECT ?visualItem ?interpretation
+WHERE
+{{
+	<{painting_uri}> crm:P65_shows_visual_item ?visualItem .
+	?visualItem :hasInterpretation ?interpretation .
+}}
+```
 
 3. Information about the curatorial narratives
 
-`:CuratorialNarrative  :hasDescription  ''content"^^rdfs:Literal`
+``` 
+:CuratorialNarrative  :hasDescription  ''content"^^rdfs:Literal
+```
 
 **SPARQL**:
 
-`PREFIX rdf : <http://www.w3.org/1999/02/22-rdf-syntax-ns#>`
-`PREFIX crm: <http://www.cidoc-crm.org/>`
-`PREFIX : <ontology_prefix>`
+``` 
+PREFIX rdf : <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX crm: <http://www.cidoc-crm.org/>
+PREFIX : <ontology_prefix>
 
-`SELECT ?narrative ? description`
-`WHERE`
-`{{`
-`?narrative :hasAssociatedHeritageObject <{painting_uri}> ;`
-		`:hasDescription ?description .`
-`}}`
+SELECT ?narrative ? description
+WHERE
+{{
+?narrative :hasAssociatedHeritageObject <{painting_uri}> ;
+		:hasDescription ?description .
+}}
+```
